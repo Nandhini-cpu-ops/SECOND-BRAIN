@@ -117,6 +117,8 @@ export default function App() {
   const [schedulePlans, setSchedulePlans] = useState({})
   const [checkedActions, setCheckedActions] = useState({})
 
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'
+
   const paths = useMemo(
     () => pathsText.split('\n').map((line) => line.trim()).filter(Boolean),
     [pathsText],
@@ -143,7 +145,7 @@ export default function App() {
     setWhatIfResponses([])
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/analyze', {
+      const response = await fetch(`${apiUrl}/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -176,7 +178,7 @@ export default function App() {
     setError('')
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/whatif', {
+      const response = await fetch(`${apiUrl}/whatif`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -223,7 +225,7 @@ export default function App() {
     setError('')
 
     try {
-      const response = await fetch('http://127.0.0.1:8000/schedule', {
+      const response = await fetch(`${apiUrl}/schedule`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
